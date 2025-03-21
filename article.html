@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- ✅ Gmarket Sans 폰트 불러오기 -->
+  <link href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>MGZ 아티클 상세</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    nav ul li a {
+  font-family: 'DungGeunMo', cursive !important;}
+
+    body {
+      background-color: #f8f0ff;
+      font-family: 'Gmarket Sans', sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* ⭐ 별사탕 프로그레스 바 */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0;
+      background: #fff8e1;
+      z-index: 9999;
+    }
+    .star-dot {
+      font-size: 18px;
+      opacity: 0.3;
+      transition: opacity 0.3s;
+    }
+    .star-dot.active {
+      opacity: 1;
+    }
+
+    .article-container {
+      max-width: 700px;
+      margin: 80px auto 50px;
+      background: #fffce9;
+      border: 3px solid #FF4D6D;
+      border-radius: 15px;
+      box-shadow: 6px 6px 0 #FF4D6D;
+      padding: 30px;
+    }
+
+    .article-title {
+      font-size: 26px;
+      color: #FF4D6D;
+      margin-bottom: 10px;
+    }
+
+    .article-author {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 30px;
+    }
+
+    .article-content {
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: left;
+      color: #444;
+    }
+
+    /* ✨ 마우스를 따라다니는 별 */
+    .cursor-star {
+      position: fixed;
+      pointer-events: none;
+      font-size: 18px;
+      z-index: 9999;
+      opacity: 0.7;
+      animation: float 0.8s ease-out forwards;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-10px, -30px) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="assets/메인로고.png" alt="MGZ 로고" class="logo">
+    <marquee id="intro-marquee-text" behavior="scroll" direction="left"></marquee>
+    <nav>
+        <ul>
+            <li><a href="index.html">홈</a></li>
+            <li><a href="mgz_intro.html">MGZ 소개</a></li>
+            <li><a href="articles.html"class="active">아티클</a></li>
+            <li><a href="#">아카이브</a></li>
+        </ul>
+    </nav>
+</header>
+
+  <!-- ⭐ 별사탕 프로그레스 바 -->
+  <div id="progress-container">
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+    <span class="star-dot">🍬</span>
+  </div>
+
+  <div class="article-container">
+    <h1 class="article-title" id="article-title">로딩 중...</h1>
+    <p class="article-author" id="article-author"></p>
+    <div class="article-content" id="article-content"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const articleId = params.get("id");
+
+    fetch(`http://localhost:8080/api/articles/${articleId}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("article-title").innerText = data.title;
+        document.getElementById("article-author").innerText = `✍ 작성자: ${data.author}`;
+        document.getElementById("article-content").innerText = data.content;
+      })
+      .catch(err => {
+        document.getElementById("article-title").innerText = "오류 발생";
+        document.getElementById("article-content").innerText = "아티클을 불러오는 데 실패했습니다.";
+        console.error("❌ 아티클 상세 로딩 실패:", err);
+      });
+  </script>
+
+  <!-- ⭐ 별사탕 스크롤 연동 -->
+  <script>
+    window.addEventListener("scroll", () => {
+      const stars = document.querySelectorAll(".star-dot");
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = scrollTop / scrollHeight;
+      const starCount = Math.round(scrolled * stars.length);
+      stars.forEach((star, i) => {
+        star.classList.toggle("active", i < starCount);
+      });
+    });
+  </script>
+
+  <!-- 🌠 마우스를 따라다니는 별 -->
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      const star = document.createElement("div");
+      star.classList.add("cursor-star");
+      star.innerText = "✨";
+      star.style.left = `${e.clientX}px`;
+      star.style.top = `${e.clientY}px`;
+      document.body.appendChild(star);
+
+      setTimeout(() => {
+        star.remove();
+      }, 800);
+    });
+  </script>
+
+</body>
+</html>
