@@ -33,12 +33,12 @@
 
     .article-card {
       width: 250px;
-      background: #FFF2AF;
-      border: 3px solid #FF4D6D;
+      background: hsl(309, 100%, 89%);
+      border: 3px solid #8b4dff;
       border-radius: 15px;
       padding: 20px;
       text-align: left;
-      box-shadow: 5px 5px 0 #FF4D6D;
+      box-shadow: 5px 5px 0 #8b4dff;
       transition: transform 0.3s;
     }
 
@@ -80,7 +80,17 @@
   </div>
 
   <script>
-    fetch("http://localhost:8080/api/articles")
+    const messages = [
+        "Mㅏ음 Gㅏ는 대로 하zㅏ, MGZ와 함께 진짜 나를 찾는 여정을 떠나봐요!"
+        ];
+        let currentMessageIndex = 0;
+        function changeMessage() {
+            document.getElementById("marquee-text").innerText = messages[currentMessageIndex];
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+        }
+        changeMessage();
+        
+    fetch("https://mgz-backend-ajhp.onrender.com/api/articles")
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("articles-container");

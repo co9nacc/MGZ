@@ -131,7 +131,7 @@
     const params = new URLSearchParams(window.location.search);
     const articleId = params.get("id");
 
-    fetch(`http://localhost:8080/api/articles/${articleId}`)
+    fetch(`https://mgz-backend-ajhp.onrender.com/api/articles/${articleId}`)
       .then(res => res.json())
       .then(data => {
         document.getElementById("article-title").innerText = data.title;
