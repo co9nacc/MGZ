@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     nav ul li a {
-      font-family: 'DungGeunMo', cursive !important;}
+      font-family: 'DungGeunMo', cursive !important;
+    }
     body {
       background-color: #FFF8E1;
       font-family: 'Gmarket Sans', sans-serif;
@@ -17,12 +18,10 @@
       padding: 0;
       text-align: center;
     }
-
     h1 {
       color: #FF4D6D;
       margin-top: 30px;
     }
-
     .articles-container {
       display: flex;
       flex-wrap: wrap;
@@ -30,7 +29,6 @@
       padding: 30px;
       gap: 20px;
     }
-
     .article-card {
       width: 250px;
       background: hsl(309, 100%, 89%);
@@ -41,21 +39,17 @@
       box-shadow: 5px 5px 0 #8b4dff;
       transition: transform 0.3s;
     }
-
     .article-card:hover {
       transform: scale(1.03);
     }
-
     .article-card h3 {
       color: #FF4D6D;
       font-size: 18px;
     }
-
     .article-card p {
       font-size: 14px;
       color: #444;
     }
-
     .article-card a {
       text-decoration: none;
       color: inherit;
@@ -67,51 +61,45 @@
     <img src="assets/메인로고.png" alt="MGZ 로고" class="logo">
     <marquee id="intro-marquee-text" behavior="scroll" direction="left"></marquee>
     <nav>
-        <ul>
-            <li><a href="index.html">홈</a></li>
-            <li><a href="mgz_intro.html">MGZ 소개</a></li>
-            <li><a href="articles.html" class="active">아티클</a></li>
-            <li><a href="#">아카이브</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="mgz_intro.html">MGZ 소개</a></li>
+        <li><a href="articles.html" class="active">아티클</a></li>
+        <li><a href="#">아카이브</a></li>
+      </ul>
     </nav>
-</header>
+  </header>
+
   <div class="articles-container" id="articles-container">
     <p>불러오는 중...</p>
   </div>
 
   <script>
-    const messages = [
-        "Mㅏ음 Gㅏ는 대로 하zㅏ, MGZ와 함께 진짜 나를 찾는 여정을 떠나봐요!"
-        ];
-        let currentMessageIndex = 0;
-        function changeMessage() {
-            document.getElementById("marquee-text").innerText = messages[currentMessageIndex];
-            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-        }
-        changeMessage();
-        
-    fetch("https://mgz-backend-ajhp.onrender.com/api/articles")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("articles-container");
-        container.innerHTML = "";
-        data.forEach(article => {
-          const card = document.createElement("div");
-          card.className = "article-card";
-          card.innerHTML = `
-            <a href="article.html?id=${article._id}">
-              <h3>${article.title}</h3>
-              <p>${article.content.slice(0, 60)}...</p>
-              <p><strong>✍ ${article.author}</strong></p>
-            </a>
-          `;
-          container.appendChild(card);
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("articles-container");
+
+      fetch("https://mgz-backend-ajhp.onrender.com/api/articles")
+        .then(res => res.json())
+        .then(data => {
+          container.innerHTML = "";
+          data.forEach(article => {
+            const card = document.createElement("div");
+            card.className = "article-card";
+            card.innerHTML = `
+              <a href="article.html?id=${article._id}">
+                <h3>${article.title}</h3>
+                <p>${article.content.slice(0, 60)}...</p>
+                <p><strong>✍ ${article.author}</strong></p>
+              </a>
+            `;
+            container.appendChild(card);
+          });
+        })
+        .catch(err => {
+          console.error("❌ 전체 아티클 로딩 실패:", err);
+          container.innerHTML = "<p>불러오기 실패!</p>";
         });
-      })
-      .catch(err => {
-        console.error("❌ 전체 아티클 로딩 실패:", err);
-        document.getElementById("articles-container").innerHTML = "<p>불러오기 실패!</p>";
-      });
+    });
   </script>
 
   <!-- 별 이펙트 전체 적용 (복붙!) -->

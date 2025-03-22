@@ -134,6 +134,8 @@
     fetch(`https://mgz-backend-ajhp.onrender.com/api/articles/${articleId}`)
       .then(res => res.json())
       .then(data => {
+        console.log("📦 받은 데이터:", data); //
+        
         document.getElementById("article-title").innerText = data.title;
         document.getElementById("article-author").innerText = `✍ 작성자: ${data.author}`;
         document.getElementById("article-content").innerText = data.content;
