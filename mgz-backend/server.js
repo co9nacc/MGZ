@@ -3,6 +3,7 @@ const Article = require('./models/Article');  // 아티클 모델 추가
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
 const cors = require('cors');
 
 const app = express();
