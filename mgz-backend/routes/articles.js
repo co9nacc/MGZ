@@ -34,6 +34,7 @@ router.post("/", async (req, res) => {
         await newArticle.save();
         res.status(201).json(newArticle);
     } catch (error) {
+        console.error("❌ 아티클 저장 중 오류 발생:", error);  // 추가된부분
         res.status(400).json({ message: "데이터 저장 실패", error });
     }
 });
