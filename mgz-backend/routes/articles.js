@@ -28,6 +28,7 @@ router.get("/:id", async (req, res) => {
 
 // 🔹 새 아티클 추가하기 (POST)
 router.post("/", async (req, res) => {
+    console.log("📥 POST 요청 수신! 데이터:", req.body);
     try {
         const newArticle = new Article(req.body);  // 요청 데이터로 새 아티클 생성
         await newArticle.save();
