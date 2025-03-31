@@ -83,12 +83,192 @@
                 <li><a href="#">홈</a></li>
                 <li><a href="mgz_intro.html">MGZ 소개</a></li>
                 <li><a href="articles.html">아티클</a></li>
-                <li><a href="#">아카이브</a></li>
+                <li><a href="archive.html">아카이브</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
+        <!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>나만의 다마고치 만들기</title>
+<style>
+    body {
+    font-family: 'DungGeunMo', sans-serif;
+    background-color: #FFF8E1;
+    text-align: center;
+    padding: 20px;
+    }
+    .customizer {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border: 4px solid #FF4D6D;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 6px 6px 0px #FF4D6D;
+    }
+    .color-options button,
+    .emoji-options button,
+    .accessory-options button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    }
+    .preview-frame {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    margin: 20px auto;
+    background-color: #FFC0CB;
+    border-radius: 20px;
+    overflow: hidden;
+    }
+    .emoji-display {
+    font-size: 40px;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    }
+    .accessory {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    }
+</style>
+</head>
+<body>
+    <br> <br> <br>
+<div class="customizer">
+    <h2>✨ 나만의 다마고치를 만들어보세요!</h2>
+    <input type="text" id="nickname" placeholder="당신의 닉네임" /><br><br>
+
+    <div>
+    <strong>🎨 배경 색상</strong><br>
+    <div class="color-options">
+        <button style="background:#FFC0CB" data-color="#FFC0CB"></button>
+        <button style="background:#A0E7E5" data-color="#A0E7E5"></button>
+        <button style="background:#FFDD94" data-color="#FFDD94"></button>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div>
+    <strong>🧸 다마고치 색상</strong><br>
+    <div class="tamagotchi-options">
+        <button data-img="assets/커스텀다마고치1.png">1</button>
+        <button data-img="assets/커스텀다마고치2.png">2</button>
+        <button data-img="assets/커스텀다마고치3.png">3</button>
+    </div>
+    </div>
+    <br>
+    <div>
+    <strong>😄 이모티콘 선택</strong><br>
+    <div class="emoji-options">
+        <button>(ᴗ͈ˬᴗ͈)ഒ</button>
+        <button>●ᴥ●</button>
+        <button>◟( ˘ ³˘)◞</button>
+        <button>٩(♡ε♡ )۶</button>
+        <button>𓁹 ͜ 𓁹</button>
+        <button>( ✋˙࿁˙ )</button>
+        <button>(  ¯⌓¯)</button>
+        <button>（ゝ。∂）</button>
+        <button>(ദ്ദി⩌𖥦⩌)</button>
+        <button>‹⁽⁰⁻⁰⁺⁾</button>
+        <button>•̀ᵕ•́</button>
+        <button>(◟‸◞)</button>
+        <button>⳻_⳺</button>
+        <button>(・灬・)</button>
+    </div>
+    </div>
+
+    <div>
+    <strong>✨ 소품 꾸미기</strong><br>
+    <div class="accessory-options">
+        <button data-img="assets/소품_왕관.png">👑</button>
+        <button data-img="assets/소품_요술봉.png">🪄</button>
+        <button data-img="assets/소품_하트뿅.png">❤️</button>
+    </div>
+    </div>
+
+    <div class="preview-frame" id="preview-frame">
+        <img id="tamagotchi-image" src="assets/커스텀다마고치1.png" alt="다마고치 이미지" style="position:absolute; width:500px; height:auto; z-index:1;">
+        <div class="emoji-display" id="emoji">(՞⋅֊⋅՞)</div>
+        <img id="accessory-image" src="assets/소품_하트뿅.png" alt="소품 이미지" style="position:absolute; width:60px; z-index:2;">
+    </div>
+
+    <input type="text" id="message" placeholder="한마디를 남겨보세요 ✍️" /><br><br>
+
+    <button onclick="saveTamagotchi()">완성!</button>
+
+    <button onclick="localStorage.removeItem('myTamagotchis'); alert('모든 다마고치가 삭제되었습니다');">
+        🗑️ 아카이브 초기화</button>
+</div>
+
+<script>
+    const frame = document.getElementById("preview-frame");
+    const emoji = document.getElementById("emoji");
+    const accessory = document.getElementById("accessory");
+
+    document.querySelectorAll(".color-options button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        frame.style.backgroundColor = btn.dataset.color;
+    });
+    });
+
+    document.querySelectorAll(".emoji-options button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        emoji.innerText = btn.innerText;
+    });
+    });
+
+    document.querySelectorAll(".accessory-options button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        accessory.innerText = btn.innerText;
+    });
+    });
+
+    function saveTamagotchi() {
+const nickname = document.getElementById("nickname").value;
+const message = document.getElementById("message").value;
+
+const accessoryImg = document.getElementById("accessory-image");
+const tamagotchiImg = document.getElementById("tamagotchi-image");
+
+const newTamagotchi = {
+    nickname: nickname,
+    message: message,
+    color: frame.style.backgroundColor,
+    emoji: emoji.innerText,
+    accessory: accessoryImg.src,
+    tamagotchi: tamagotchiImg.src,
+    accessoryStyle: {
+    top: accessoryImg.style.top,
+    left: accessoryImg.style.left,
+    width: accessoryImg.style.width,
+    transform: accessoryImg.style.transform
+    }
+};
+
+const stored = JSON.parse(localStorage.getItem("myTamagotchis")) || [];
+stored.push(newTamagotchi);
+localStorage.setItem("myTamagotchis", JSON.stringify(stored));
+
+alert("✨ 저장되었습니다! 아카이브로 이동합니다!");
+window.location.href = "archive.html";
+}
+</script>
+</body>
+</html>
+
         <section id="articles">
             <h2>최신 아티클</h2>
             <div id="articles-container">
@@ -147,7 +327,7 @@
                 });
             } catch (error) {
                 console.error("❌ 아티클 불러오기 실패:", error);
-                document.getElementById("articles-container").innerHTML = "<p>데이터를 불러오는 중 오류가 발생했습니다.</p>";
+                document.getElementById("articles-container").innerHTML = "<p>아티클 카테고리에서 아티클들을 확인해보세요!</p>";
             }
         }
         // 페이지 로드 시 자동으로 아티클 불러오기
@@ -211,6 +391,54 @@
     }
     `;
     document.head.appendChild(style);
+</script>
+
+<script>
+    // 다마고치 이미지 버튼 클릭 시 이미지 교체
+    const tamagotchiButtons = document.querySelectorAll(".tamagotchi-options button");
+    const tamagotchiImg = document.getElementById("tamagotchi-image");
+
+    tamagotchiButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const imageName = button.getAttribute("data-img");
+            tamagotchiImg.src = imageName;
+        });
+    });
+</script>
+
+<script>
+    const accessoryImg = document.getElementById("accessory-image");
+
+    document.querySelectorAll(".accessory-options button").forEach(button => {
+        button.addEventListener("click", () => {
+            const imagePath = button.getAttribute("data-img");
+            accessoryImg.src = imagePath;
+
+            // 버튼마다 다른 위치 지정
+            if (imagePath.includes("왕관")) {
+                accessoryImg.style.top = "0px";
+                accessoryImg.style.left = "50%";
+                accessoryImg.style.transform = "translateX(-50%)";
+                accessoryImg.style.width = "80px"; // 크기 증가
+                accessoryImg.style.right = "";
+                accessoryImg.style.bottom = "";
+            } else if (imagePath.includes("요술봉")) {
+                accessoryImg.style.top = "50%";
+                accessoryImg.style.left = "-20px";
+                accessoryImg.style.transform = "translateY(-50%)"; // 좌측 중앙
+                accessoryImg.style.width = "90px"; // 크기 증가
+                accessoryImg.style.right = "";
+                accessoryImg.style.bottom = "";
+            } else if (imagePath.includes("하트뿅")) {
+                accessoryImg.style.top = "60px"; // 이모티콘과 동일한 top
+                accessoryImg.style.left = "50%";
+                accessoryImg.style.transform = "translateX(-50%)";
+                accessoryImg.style.width = "90px"; // 크기 증가
+                accessoryImg.style.right = "";
+                accessoryImg.style.bottom = "";
+            }
+        });
+    });
 </script>
 </body>
 </html>

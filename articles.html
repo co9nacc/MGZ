@@ -1,8 +1,6 @@
-<!-- articles.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- ✅ Gmarket Sans 폰트 불러오기 -->
   <link href="https://fonts.googleapis.com/css2?family=Gmarket+Sans:wght@400;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <title>MGZ 전체 아티클</title>
@@ -12,7 +10,7 @@
       font-family: 'DungGeunMo', cursive !important;
     }
     body {
-      background-color: #FFF8E1;
+      background-color: #FFE4F0 ;; /* ✅ 단색 배경 변경 */
       font-family: 'Gmarket Sans', sans-serif;
       margin: 0;
       padding: 0;
@@ -21,6 +19,7 @@
     h1 {
       color: #FF4D6D;
       margin-top: 30px;
+      text-align: center; /* ✅ 중앙 정렬 보장 */
     }
     .articles-container {
       display: flex;
@@ -65,7 +64,7 @@
         <li><a href="index.html">홈</a></li>
         <li><a href="mgz_intro.html">MGZ 소개</a></li>
         <li><a href="articles.html" class="active">아티클</a></li>
-        <li><a href="#">아카이브</a></li>
+        <li><a href="archive.html">아카이브</a></li>
       </ul>
     </nav>
   </header>
@@ -78,31 +77,28 @@
     document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("articles-container");
       const tamagotchiImages = [
-  "assets/아티클프레임1.png", "assets/아티클프레임2.png", "assets/아티클프레임3.png"
-];
+        "assets/아티클프레임1.png", "assets/아티클프레임2.png", "assets/아티클프레임3.png"
+      ];
       fetch("https://mgz-backend-ajhp.onrender.com/api/articles")
         .then(res => res.json())
         .then(data => {
           container.innerHTML = "";
           data.forEach(article => {
-  const frame = document.createElement("div");
-  frame.className = "tamagotchi-frame";
-
-  // 랜덤 이미지
-  const randomImage = tamagotchiImages[Math.floor(Math.random() * tamagotchiImages.length)];
-
-  frame.innerHTML = `
-    <img src="${randomImage}" class="tamagotchi-bg" />
-    <div class="tamagotchi-screen">
-      <a href="article.html?id=${article._id}" style="text-decoration: none; color: inherit;">
-        <h3 class="article-title">${article.title}</h3>
-        <p class="article-preview">${article.content.slice(0, 35)}...</p>
-        <p class="article-author">✍ ${article.author}</p>
-      </a>
-    </div>
-  `;
-  container.appendChild(frame);
-});
+            const frame = document.createElement("div");
+            frame.className = "tamagotchi-frame";
+            const randomImage = tamagotchiImages[Math.floor(Math.random() * tamagotchiImages.length)];
+            frame.innerHTML = `
+              <img src="${randomImage}" class="tamagotchi-bg" />
+              <div class="tamagotchi-screen">
+                <a href="article.html?id=${article._id}" style="text-decoration: none; color: inherit;">
+                  <h3 class="article-title">${article.title}</h3>
+                  <p class="article-preview">${article.content.slice(0, 35)}...</p>
+                  <p class="article-author">✍ ${article.author}</p>
+                </a>
+              </div>
+            `;
+            container.appendChild(frame);
+          });
         })
         .catch(err => {
           console.error("❌ 전체 아티클 로딩 실패:", err);
@@ -111,7 +107,6 @@
     });
   </script>
 
-  <!-- 별 이펙트 전체 적용 (복붙!) -->
   <script>
     document.addEventListener("mousemove", (e) => {
       const star = document.createElement("div");

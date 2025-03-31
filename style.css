@@ -426,6 +426,38 @@ nav ul li a.active {
   gap: 60px 40px; /* ✅ 세로 간격, 가로 간격 */
 }
 
+.preview-frame {
+  position: relative;
+  width: 240px;
+  height: 360px;
+  background-color: #FFDD94;
+  margin: 20px auto;
+  border-radius: 15px;
+  border: 2px dashed #FF4D6D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
+#tamagotchi-image {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px; /* 사이즈 키움 */
+  max-width: 100%; /* 반응형 대응 */
+  height: auto;
+  z-index: 1;
+}
+
+#emoji {
+  font-size: 20px; /* 줄임 */
+  position: absolute;
+  top: 90px; /* 이미지 중앙보다 약간 아래 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
 
 

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>다마고치 아카이브</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: none !important; 
+      background-color: #FFF8E1; /* 배경 이미지 제거, 단색 배경 유지 */
+      font-family: 'DungGeunMo', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .preview-frame {
+      position: relative;
+      width: 240px;
+      height: 360px;
+      background-color: #FFDD94;
+      margin: 20px auto;
+      border-radius: 15px;
+      border: 2px dashed #FF4D6D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #tamagotchi-image {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: auto;
+      z-index: 1;
+    }
+    #emoji {
+      font-size: 20px;
+      position: absolute;
+      top: 110px; /* ✅ 더 아래로 조정 */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    #accessory-image {
+      position: absolute;
+      z-index: 3;
+    }
+    .tamagotchi-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border: 4px solid #FF4D6D;
+      box-shadow: 8px 8px 0px #FF4D6D;
+      padding: 20px;
+      border-radius: 15px;
+      width: 300px;
+      z-index: 999;
+    }
+    .popup.active {
+      display: block;
+    }
+    .close-btn {
+      background: #FF4D6D;
+      color: white;
+      padding: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: 'DungGeunMo', cursive;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="assets/메인로고.png" alt="MGZ 로고" class="logo">
+    <marquee id="archive-marquee" behavior="scroll" direction="left"></marquee>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+        <li><a href="mgz_intro.html">MGZ 소개</a></li>
+        <li><a href="articles.html">아티클</a></li>
+        <li><a href="#" class="active">아카이브</a></li>
+      </ul>
+    </nav>
+    <p>✨ 캐릭터를 클릭하면 저장된 한마디를 확인할 수 있어요 ✨</p>
+  </header>
+
+  <h1>📦 다마고치 아카이브</h1>
+  <div class="tamagotchi-list" id="archive-container"></div>
+
+  <div id="popup" class="popup">
+    <h2 id="popup-nickname"></h2>
+    <p id="popup-emoji" style="font-size: 24px; text-align: center;"></p>
+    <br><br>
+    <p id="popup-message"></p>
+    <button class="close-btn" onclick="closePopup()">닫기</button>
+  </div>
+
+  <script>
+    const tamagotchis = JSON.parse(localStorage.getItem("myTamagotchis")) || [];
+    const container = document.getElementById("archive-container");
+
+    function createCard(tama) {
+      const frame = document.createElement("div");
+      frame.className = "preview-frame";
+      frame.style.backgroundColor = tama.color || "#FFDD94";
+
+      const img = document.createElement("img");
+      img.id = "tamagotchi-image";
+      img.src = tama.tamagotchi || "assets/커스텀다마고치1.png";
+
+      const emoji = document.createElement("div");
+      emoji.id = "emoji";
+      emoji.innerText = tama.emoji || "";
+
+      const acc = document.createElement("img");
+      acc.id = "accessory-image";
+      acc.src = tama.accessory || "";
+
+      // 소품 위치 복원
+      if (tama.accessoryStyle) {
+        Object.assign(acc.style, tama.accessoryStyle);
+      } else {
+        acc.style.top = "60px";
+        acc.style.left = "50%";
+        acc.style.width = "60px";
+        acc.style.transform = "translateX(-50%)";
+      }
+
+      frame.appendChild(img);
+      frame.appendChild(acc);
+      frame.appendChild(emoji);
+
+      frame.onclick = () => showPopup(tama);
+      container.appendChild(frame);
+    }
+
+    function showPopup(tama) {
+      document.getElementById("popup-nickname").innerText = `👤 ${tama.nickname}`;
+      document.getElementById("popup-emoji").innerText = tama.emoji;
+      document.getElementById("popup-message").innerText = `💬 ${tama.message}`;
+      document.getElementById("popup").classList.add("active");
+    }
+
+    function closePopup() {
+      document.getElementById("popup").classList.remove("active");
+    }
+
+    if (tamagotchis.length === 0) {
+      container.innerHTML = "<p>저장된 다마고치가 없습니다.</p>";
+    } else {
+      tamagotchis.forEach(createCard);
+    }
+  </script>
+
+  <!-- 별 이펙트 -->
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      const star = document.createElement("div");
+      star.classList.add("cursor-star");
+      star.innerText = "✨";
+      star.style.position = "fixed";
+      star.style.left = `${e.clientX}px`;
+      star.style.top = `${e.clientY}px`;
+      star.style.pointerEvents = "none";
+      star.style.fontSize = "18px";
+      star.style.opacity = "0.7";
+      star.style.zIndex = 9999;
+      star.style.animation = "float 0.8s ease-out forwards";
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 800);
+    });
+
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @keyframes float {
+        0% { transform: translate(0, 0) scale(1); opacity: 1; }
+        100% { transform: translate(-10px, -30px) scale(0.5); opacity: 0; }
+      }
+      .cursor-star {
+        transition: transform 0.3s, opacity 0.3s;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+  <script>
+    const messages = [
+      "Mㅏ음 Gㅏ는 대로 하zㅏ, MGZ와 함께 진짜 나를 찾는 여정을 떠나봐요!"
+    ];
+    let currentIndex = 0;
+    function changeMessage() {
+      document.getElementById("archive-marquee").innerText = messages[currentIndex];
+      currentIndex = (currentIndex + 1) % messages.length;
+    }
+    changeMessage();
+  </script>
+</body>
+</html>
