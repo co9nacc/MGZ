@@ -112,11 +112,11 @@
     <h1><br>당신의 자아찾기 여정을 함께할 도우미를 선택하세요!<br><br></h1>
     <div class="guide-list">
         <div class="guide-row">
-            <di class="guide" onclick="showPopup('매실', '잔잔한 분위기를 즐기는, 소확행을 지향하는 도우미!')">
+            <di class="guide" onclick="showPopup('매실', '평범한 일상이 속에서 비범한 행복을 발견하는 도우미!')">
                 <img src="assets/매실.jpeg" alt="매실" class="guide-img">
                 <p class="guide-name">매실</p>
             </di>
-            <div class="guide" onclick="showPopup('당근', '아이돌과 맛집을 사랑하는 열정적인 도우미!')">
+            <div class="guide" onclick="showPopup('당근', '케이팝과 맛집탐방에 진심인 도우미!')">
                 <img src="assets/당근.jpeg" alt="당근" class="guide-img">
                 <p class="guide-name">당근</p>
             </div>
@@ -126,7 +126,7 @@
             </div>
         </div>
         <div class="guide-row">
-            <div class="guide" onclick="showPopup('뉴', '시사와 깊이 있는 글을 즐기는 도우미!')">
+            <div class="guide" onclick="showPopup('뉴', '활자와 토론에 중독된 도우미!')">
                 <img src="assets/뉴.jpeg" alt="뉴" class="guide-img">
                 <p class="guide-name">뉴</p>
             </div>
@@ -159,7 +159,7 @@
 
 <script>
 const introMessages = [
-    "Mㅏ음 Gㅏ는대로 하zㅏ, MGZ와 함께 진짜 나를 찾을 시간!"
+    "mㅏ음 gㅏ는대로 하zㅏ, MGZ와 함께 진짜 나를 찾을 시간!"
 ];
 
 let introMessageIndex = 0;
@@ -209,7 +209,7 @@ changeIntroMessage();
         <img src="assets/당근.jpeg" alt="당근" class="dialogue-img">
         <p class="dialogue-name">당근</p>
     </div>
-    <p class="dialogue-text">"아이돌, 맛집, 아기자기한 소품이 궁금하면 언제든 나를 찾아와요!"</p>
+    <p class="dialogue-text">"케이팝, 맛집, 소품.. 느좋에 美쳐있다면 나를 찾아와요!"</p>
 </div>
 <div class="dialogue-text2-wrapper">
     <p class="dialogue-text2">도우미 당근과 가까워지고 싶다면 먼저 적극적으로 다가가는 걸 추천합니다. 가장 최근의 관심사는 아이돌입니다. 남자 아이돌, 여자 아이돌 가리지 않고 좋아하니 케이팝 이야기를 하고 싶을 때는 언제든 당근을 찾아가세요. 아기자기한 소품도 굉장히 좋아하며 이를 이용해 방을 꾸미는 것도 좋아합니다. 서울 곳곳 맛집을 굉장히 잘 알고 있으니, 맛집 추천은 당근에게 맡겨보세요. 특히 분위기 좋은 카페에 가는 걸 가장 좋아한답니다.</p>
@@ -251,7 +251,7 @@ changeIntroMessage();
         <img src="assets/제로.jpeg" alt="제로" class="dialogue-img">
         <p class="dialogue-name">제로</p>
     </div>
-    <p class="dialogue-text">"미스테리한 매력이 궁금하다면, 저희와 함께하세요."</p>
+    <p class="dialogue-text">"무엇을 원하든 이뤄드릴게요."</p>
 </div>
 <div class="dialogue-text2-wrapper">
     <p class="dialogue-text2">도우미 제로는 좋아하는 사람들을 챙기는 걸 가장 행복해합니다. 창작하는 것도, 본인의 창작물을 여러 사람들에게 보여주는 것에도 망설이지 않는 편입니다. 일이 아무리 많아도 본인이 선택했다면 끝까지 해내는 모습만 보여줍니다. 선을 넘는 행동은 제로와의 인연을 바로 자를 수 있으니 조심하세요. 또 달달한 디저트와 춤을 즐깁니다.</p>
@@ -307,10 +307,10 @@ function createStarEffect(element) {
 
 document.querySelectorAll(".dialogue-img").forEach(img => {
     const responses = {
-        "매실": ["오늘은 기분이 좋아요!", "조용히 책을 읽고 싶어요.", "따뜻한 차 한잔이 생각나요."],
-        "당근": ["아이돌 신곡 나왔어? 들어봐야겠다!", "오늘은 카페 투어 가고 싶어.", "맛있는 음식 먹고 싶어!", "이거 너무 귀엽다!"],
+        "매실": ["푸딩을 먹으면서 잔잔한 힐링 영화를 볼거야!", "집에 가고 싶다 (너무 갑자기 본심 튀어나옴(갑본튀..)인가..ㅎㅎ..)", "이번 주말에 같이 나들이 가자구", "집순이", "재밌는 책과 영화만 있다면 집에 감금돼도 좋아.."],
+        "당근": ["아이돌 신곡 나왔어? 들어봐야겠다!", "오늘은 카페 투어 가고 싶어.", "맛있는 음식 먹고 싶어!", "이거 너무 귀엽다!", "오늘은 누구 직캠 볼까?", "벌써 배부르다니 슬퍼.. 그치만 디저트는 먹지", "소품 사는 것은 사치가 아니다 행복이다", "연남동지박령"],
         "단잠": ["새벽 감성이 최고야.", "좋은 노래 하나 추천해줄까?", "디자인 작업하는 중이야!"],
-        "뉴": ["오늘 핫한 뉴스 봤어?", "심오한 주제에 대해 이야기하고 싶어.", "이 책 한번 읽어봐!"],
+        "뉴": ["오늘 아침 신문 봤어?", "멋져보이지 않는 것은 하지 않아", "티라미수 먹고 싶다", "독서토론하자. 먼저 지치는 사람이..더보기", "소원을 말해봐~"],
         "제로": ["비밀스러운 하루를 보내고 있어.", "어떤 모험을 떠날까?", "오늘은 뭔가 미스터리한 기분이야."]
     };
 
