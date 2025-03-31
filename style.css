@@ -7,7 +7,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    background-image: url("assets/배경.png"); /* 배경이미지 */
+    background-image: url("assets/BG.png"); /* 배경이미지 */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
