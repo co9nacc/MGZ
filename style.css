@@ -7,6 +7,10 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    background-image: url("assets/배경.png"); /* 배경이미지 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @font-face {
@@ -85,10 +89,6 @@ footer {
     font-size: 14px;
 }
 
-body {
-  background-image: url(https://i.pinimg.com/736x/a5/4d/3f/a54d3f4f9f1bbc07eacc60d5cabce14a.jpg); /* 배경이미지 */
-  background-size: cover;
-}
 
 
 h1 {
@@ -320,17 +320,22 @@ marquee {
 }
 
 .article-card {
-  background: #fff3cd;
-  border: 2px dashed #ff4d6d;
-  border-radius: 15px;
-  padding: 15px;
-  margin-bottom: 20px;
-  text-align: left;
-  box-shadow: 5px 5px 0 #ff4d6d;
+  width: 180px;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 50px 20px 20px; /* 위쪽 여백 조정 (화면 영역 맞춤) */
+  margin: 10px;
+  text-align: center;
+  box-shadow: none;
+  position: relative;
+  font-family: 'Gmarket Sans', sans-serif;
   transition: transform 0.2s ease;
 }
 .article-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05);
 }
 .article-title {
   font-size: 20px;
@@ -357,6 +362,70 @@ nav ul li a.active {
   font-weight: bold;
   text-decoration: underline;
 }
+
+.tamagotchi-frame {
+  position: relative;
+  width: 240px;
+  height: 300px; /* ✅ 프레임 비율 고정 */
+  margin: 40px 30px;
+  flex-shrink: 0;
+}
+
+.tamagotchi-bg {
+  width: 140%;
+  height: 140%;
+  object-fit: contain; /* ✅ 비율 유지하면서 채우기 */
+  display: block;
+}
+
+/* 🔥 여기! 이미지 안쪽 '화면' 위치에 정확히 텍스트 삽입 */
+.tamagotchi-screen {
+  position: absolute;
+  top: 125px;          /* ✅ 약간 아래로 */
+  left: 80px;         /* ✅ 오른쪽으로 살짝 */
+  width: 153px;
+  height: 118px;
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 17px 10px 10px 10px;
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  font-family: 'Gmarket Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0 0 4px #ccc;
+}
+.tamagotchi-screen h3 {
+  font-size: 14px;
+  margin: 0 0 6px 0;
+  color: #FF4D6D;
+  line-height: 1.3;
+  word-break: keep-all;
+  white-space: normal;     /* ✅ 줄바꿈 허용 */
+  overflow-wrap: break-word; /* ✅ 단어 길어지면 줄바꿈 */
+}
+.tamagotchi-screen p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  line-height: 1.3;    
+  color: #444;
+  overflow: hidden;
+}
+
+.tamagotchi-frame:nth-child(even) {
+  margin-top: 80px; /* ✅ 짝수 번째 카드 아래로 */
+}
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px 40px; /* ✅ 세로 간격, 가로 간격 */
+}
+
 
 
 

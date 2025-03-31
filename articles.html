@@ -31,7 +31,7 @@
     }
     .article-card {
       width: 250px;
-      background: hsl(309, 100%, 89%);
+      background: hsl(78, 100%, 95%);
       border: 3px solid #8b4dff;
       border-radius: 15px;
       padding: 20px;
@@ -77,23 +77,32 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("articles-container");
-
+      const tamagotchiImages = [
+  "assets/아티클프레임1.png", "assets/아티클프레임2.png", "assets/아티클프레임3.png"
+];
       fetch("https://mgz-backend-ajhp.onrender.com/api/articles")
         .then(res => res.json())
         .then(data => {
           container.innerHTML = "";
           data.forEach(article => {
-            const card = document.createElement("div");
-            card.className = "article-card";
-            card.innerHTML = `
-              <a href="article.html?id=${article._id}">
-                <h3>${article.title}</h3>
-                <p>${article.content.slice(0, 60)}...</p>
-                <p><strong>✍ ${article.author}</strong></p>
-              </a>
-            `;
-            container.appendChild(card);
-          });
+  const frame = document.createElement("div");
+  frame.className = "tamagotchi-frame";
+
+  // 랜덤 이미지
+  const randomImage = tamagotchiImages[Math.floor(Math.random() * tamagotchiImages.length)];
+
+  frame.innerHTML = `
+    <img src="${randomImage}" class="tamagotchi-bg" />
+    <div class="tamagotchi-screen">
+      <a href="article.html?id=${article._id}" style="text-decoration: none; color: inherit;">
+        <h3 class="article-title">${article.title}</h3>
+        <p class="article-preview">${article.content.slice(0, 35)}...</p>
+        <p class="article-author">✍ ${article.author}</p>
+      </a>
+    </div>
+  `;
+  container.appendChild(frame);
+});
         })
         .catch(err => {
           console.error("❌ 전체 아티클 로딩 실패:", err);
