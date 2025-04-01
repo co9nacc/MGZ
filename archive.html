@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background-image: none !important; 
-      background-color: #FFF8E1; /* 배경 이미지 제거, 단색 배경 유지 */
+      background-image: none !important;
+      background-color: #FFF8E1;
       font-family: 'DungGeunMo', sans-serif;
       text-align: center;
       padding: 30px;
@@ -41,7 +41,7 @@
     #emoji {
       font-size: 20px;
       position: absolute;
-      top: 110px; /* ✅ 더 아래로 조정 */
+      top: 110px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
@@ -98,7 +98,7 @@
     <p>✨ 캐릭터를 클릭하면 저장된 한마디를 확인할 수 있어요 ✨</p>
   </header>
 
-  <h1>📦 다마고치 아카이브</h1>
+  <h1>📦 아카이브: MGZ 자아도감</h1>
   <div class="tamagotchi-list" id="archive-container"></div>
 
   <div id="popup" class="popup">
@@ -110,7 +110,6 @@
   </div>
 
   <script>
-    const tamagotchis = JSON.parse(localStorage.getItem("myTamagotchis")) || [];
     const container = document.getElementById("archive-container");
 
     function createCard(tama) {
@@ -130,7 +129,6 @@
       acc.id = "accessory-image";
       acc.src = tama.accessory || "";
 
-      // 소품 위치 복원
       if (tama.accessoryStyle) {
         Object.assign(acc.style, tama.accessoryStyle);
       } else {
@@ -159,11 +157,20 @@
       document.getElementById("popup").classList.remove("active");
     }
 
-    if (tamagotchis.length === 0) {
-      container.innerHTML = "<p>저장된 다마고치가 없습니다.</p>";
-    } else {
-      tamagotchis.forEach(createCard);
-    }
+    // ✅ 서버에서 다마고치 불러오기
+    fetch("https://mgz-backend-ajhp.onrender.com/api/tamagotchis")
+      .then(res => res.json())
+      .then(data => {
+        if (data.length === 0) {
+          container.innerHTML = "<p>저장된 다마고치가 없습니다.</p>";
+        } else {
+          data.forEach(createCard);
+        }
+      })
+      .catch(err => {
+        console.error("불러오기 실패:", err);
+        container.innerHTML = "<p>다마고치를 불러올 수 없습니다.</p>";
+      });
   </script>
 
   <!-- 별 이펙트 -->

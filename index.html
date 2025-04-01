@@ -238,30 +238,35 @@
 const nickname = document.getElementById("nickname").value;
 const message = document.getElementById("message").value;
 
-const accessoryImg = document.getElementById("accessory-image");
-const tamagotchiImg = document.getElementById("tamagotchi-image");
-
-const newTamagotchi = {
-    nickname: nickname,
-    message: message,
+const data = {
+    nickname,
+    message,
     color: frame.style.backgroundColor,
     emoji: emoji.innerText,
     accessory: accessoryImg.src,
-    tamagotchi: tamagotchiImg.src,
     accessoryStyle: {
     top: accessoryImg.style.top,
     left: accessoryImg.style.left,
     width: accessoryImg.style.width,
     transform: accessoryImg.style.transform
-    }
+    },
+    tamagotchi: tamagotchiImg.src
 };
 
-const stored = JSON.parse(localStorage.getItem("myTamagotchis")) || [];
-stored.push(newTamagotchi);
-localStorage.setItem("myTamagotchis", JSON.stringify(stored));
-
-alert("✨ 저장되었습니다! 아카이브로 이동합니다!");
-window.location.href = "archive.html";
+fetch("https://mgz-backend-ajhp.onrender.com/api/tamagotchis", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+})
+.then(res => res.json())
+.then(() => {
+    alert("✨ 저장되었습니다! 아카이브로 이동합니다!");
+    window.location.href = "archive.html";
+})
+.catch(err => {
+    alert("😢 저장 실패. 다시 시도해주세요.");
+    console.error(err);
+});
 }
 </script>
 </body>

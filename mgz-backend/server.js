@@ -28,6 +28,9 @@ res.send('MGZ 백엔드 서버가 정상적으로 실행되고 있습니다! �
 const articlesRoutes = require("./routes/articles");
 app.use("/api/articles", articlesRoutes);
 
+const tamagotchiRoutes = require('./routes/tamagotchis');
+app.use("/api/tamagotchis", tamagotchiRoutes);
+
 // 🔌 MongoDB 연결
 mongoose.connect(MONGO_URI, {
 useNewUrlParser: true,
