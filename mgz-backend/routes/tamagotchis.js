@@ -3,6 +3,19 @@ const express = require('express');
 const router = express.Router();
 const Tamagotchi = require('../models/Tamagotchi');
 
+// DELETE: 특정 다마고치 삭제
+router.delete('/:id', async (req, res) => {
+  try {
+    const result = await Tamagotchi.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).send("해당 다마고치를 찾을 수 없습니다.");
+    res.send("삭제 완료!");
+  } catch (err) {
+    res.status(500).send("서버 오류: " + err.message);
+  }
+});
+
+module.exports = router;
+
 // GET 전체 다마고치 조회
 router.get("/", async (req, res) => {
   try {
