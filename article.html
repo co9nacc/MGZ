@@ -31,27 +31,22 @@
       overflow-x: hidden;
     }
 
-    /* ⭐ 별사탕 프로그레스 바 */
-    #progress-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 0;
-      background: #fff8e1;
-      z-index: 9999;
-    }
-    .star-dot {
-      font-size: 18px;
-      opacity: 0.3;
-      transition: opacity 0.3s;
-    }
-    .star-dot.active {
-      opacity: 1;
-    }
+    /* 레인보우 프로그레스바 */
+    #rainbow-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: #f2f2f2;
+  z-index: 9999;
+}
+#progress-inner {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5, #4ADEDE, #42ff8c);
+  transition: width 0.2s ease-out;
+}
 
     .article-container {
       max-width: 700px;
@@ -118,19 +113,10 @@
     </nav>
 </header>
 
-  <!-- ⭐ 별사탕 프로그레스 바 -->
-  <div id="progress-container">
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-    <span class="star-dot">🍬</span>
-  </div>
+/* 레인보우 프로그레스바🌈 */
+<div id="rainbow-progress-bar">
+  <div id="progress-inner"></div>
+</div>
 
   <div class="article-container">
     <h1 class="article-title" id="article-title">로딩 중...</h1>
@@ -149,7 +135,7 @@
         
         document.getElementById("article-title").innerText = data.title;
         document.getElementById("article-author").innerText = `✍ 작성자: ${data.author}`;
-        document.getElementById("article-content").innerText = data.content;
+        document.getElementById("article-content").innerHTML = data.content;
       })
       .catch(err => {
         document.getElementById("article-title").innerText = "오류 발생";
@@ -158,19 +144,15 @@
       });
   </script>
 
-  <!-- ⭐ 별사탕 스크롤 연동 -->
-  <script>
-    window.addEventListener("scroll", () => {
-      const stars = document.querySelectorAll(".star-dot");
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = scrollTop / scrollHeight;
-      const starCount = Math.round(scrolled * stars.length);
-      stars.forEach((star, i) => {
-        star.classList.toggle("active", i < starCount);
-      });
-    });
-  </script>
+<!-- 🌈 레인보우 스크롤 프로그레스 바 -->
+<script>
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    document.getElementById("progress-inner").style.width = `${scrollPercent}%`;
+  });
+</script>
 
   <!-- 🌠 마우스를 따라다니는 별 -->
   <script>
