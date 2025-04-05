@@ -49,32 +49,37 @@
 }
 
     .article-container {
-      max-width: 700px;
-      margin: 80px auto 50px;
+      max-width: 880px; /* ✅ 기존 700px → 넓게 조정 */
+      margin: 100px auto 80px;
       background: #fffce9;
       border: 3px solid #FF4D6D;
-      border-radius: 15px;
-      box-shadow: 6px 6px 0 #FF4D6D;
-      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 8px 8px 0 #FF4D6D;
+      padding: 40px;
     }
 
     .article-title {
-      font-size: 26px;
+      font-size: 32px;  /* ✅ 키워서 더 주목받게 */
+      font-weight: bold;
       color: #FF4D6D;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
 
     .article-author {
-      font-size: 14px;
-      color: #999;
-      margin-bottom: 30px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #888;
+      margin-bottom: 40px;
     }
 
     .article-content {
       font-size: 18px;
-      line-height: 1.6;
+      font-family: Gmarket Sans, sans-serif;
+      line-height: 1.8;
       text-align: left;
-      color: #444;
+      color: #333;
+      word-break: keep-all;
     }
 
     /* ✨ 마우스를 따라다니는 별 */
@@ -134,7 +139,7 @@
         
         document.getElementById("article-title").innerText = data.title;
         document.getElementById("article-author").innerText = `✍ 작성자: ${data.author}`;
-        document.getElementById("article-content").innerHTML = data.content;
+        document.getElementById("article-content").innerText = data.content;
       })
       .catch(err => {
         document.getElementById("article-title").innerText = "오류 발생";

@@ -460,4 +460,16 @@ nav ul li a.active {
   z-index: 2;
 }
 
+.article-content hr {
+  border: 0;
+  border-top: 2px dashed #ffb3c1;
+  margin: 40px 0;
+}
 
+.article-content img {
+  max-width: 100%;
+  border: 2px solid #ffd1dc;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 #f58aa8;
+  margin: 20px 0;
+}
