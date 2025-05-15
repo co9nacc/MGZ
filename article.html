@@ -138,12 +138,12 @@
         console.log("📦 받은 데이터:", data); //
         
         document.getElementById("article-title").innerText = data.title;
-        document.getElementById("article-author").innerText = `✍ 작성자: ${data.author}`;
-        document.getElementById("article-content").innerText = data.content;
+        document.getElementById("article-author").innerHTML = `✍ 작성자: ${data.author}`;
+        document.getElementById("article-content").innerHTML = data.content;
       })
       .catch(err => {
-        document.getElementById("article-title").innerText = "오류 발생";
-        document.getElementById("article-content").innerText = "아티클을 불러오는 데 실패했습니다.";
+        document.getElementById("article-title").innerHTML = "오류 발생";
+        document.getElementById("article-content").innerHTML = "아티클을 불러오는 데 실패했습니다.";
         console.error("❌ 아티클 상세 로딩 실패:", err);
       });
   </script>
