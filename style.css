@@ -7,10 +7,12 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+
     background-image: url("assets/BG.png"); /* 배경이미지 */
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top center;  /* 상단 중심 정렬 */
+    background-size: contain;         /* cover → contain 으로! */
+    background-attachment: fixed;     /* 스크롤에도 고정되게 */
 }
 
 @font-face {
@@ -322,7 +324,7 @@ marquee {
 .article-card {
   width: 180px;
   height: 220px;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   border: none;
