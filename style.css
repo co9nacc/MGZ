@@ -473,12 +473,3 @@ nav ul li a.active {
   box-shadow: 4px 4px 0 #f58aa8;
   margin: 20px 0;
 }
-
-.tamagotchi-screen .article-author {
-  font-size: 10px;
-  font-family: 'DungGeunMo', cursive !important;
-  color: #a15fb2;
-  margin-top: 4px;
-  font-weight: bold;
-  letter-spacing: -0.5px;
-}
