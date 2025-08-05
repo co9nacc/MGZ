@@ -476,7 +476,7 @@ nav ul li a.active {
 
 .tamagotchi-screen .article-author {
   font-size: 10px;
-  font-family: 'DungGeunMo', cursive;
+  font-family: 'DungGeunMo', cursive !important;
   color: #a15fb2;
   margin-top: 4px;
   font-weight: bold;
