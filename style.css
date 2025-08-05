@@ -474,11 +474,11 @@ nav ul li a.active {
   margin: 20px 0;
 }
 
-.article-author {
-  font-size: 10px; /* 작고 귀엽게 */
-  font-family: 'DungGeunMo', cursive; /* 복고 감성의 핵심 */
-  color: #a15fb2; /* 레트로 보라빛 */
-  margin-top: 5px;
+.tamagotchi-screen .article-author {
+  font-size: 10px;
+  font-family: 'DungGeunMo', cursive;
+  color: #a15fb2;
+  margin-top: 4px;
   font-weight: bold;
   letter-spacing: -0.5px;
 }
