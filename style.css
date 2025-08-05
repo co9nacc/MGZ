@@ -473,3 +473,12 @@ nav ul li a.active {
   box-shadow: 4px 4px 0 #f58aa8;
   margin: 20px 0;
 }
+
+.tamagotchi-author {
+  font-size: 18px;
+  font-family: 'DungGeunMo';
+  color: #ff3f6d;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.4;
+}
