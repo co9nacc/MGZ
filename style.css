@@ -473,3 +473,12 @@ nav ul li a.active {
   box-shadow: 4px 4px 0 #f58aa8;
   margin: 20px 0;
 }
+
+.article-author {
+  font-size: 10px; /* 작고 귀엽게 */
+  font-family: 'DungGeunMo', cursive; /* 복고 감성의 핵심 */
+  color: #a15fb2; /* 레트로 보라빛 */
+  margin-top: 5px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+}
