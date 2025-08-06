@@ -474,11 +474,15 @@ nav ul li a.active {
   margin: 20px 0;
 }
 
-.tamagotchi-author {
-  font-size: 18px;
-  font-family: 'DungGeunMo';
-  color: #ff3f6d;
+.articles-author {
+  font-size: 10px;
+  font-family: 'DungGeunMo', cursive;
+  color: #a15fb2;
   font-weight: bold;
-  text-align: center;
-  line-height: 1.4;
+  letter-spacing: -0.5px;
+  margin-top: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 2px 6px;
+  border-radius: 6px;
+  display: inline-block;
 }
