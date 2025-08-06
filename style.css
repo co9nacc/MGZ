@@ -474,9 +474,9 @@ nav ul li a.active {
   margin: 20px 0;
 }
 
-.article-author {
+.articles-author {
   font-size: 10px;
-  font-family: 'DungGeunMo', cursive;
+  font-family: 'DungGeunMo', cursive !important;
   color: #a15fb2;
   font-weight: bold;
   letter-spacing: -0.5px;
